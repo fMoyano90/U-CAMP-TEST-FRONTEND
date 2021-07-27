@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { SearchProduct } from "./components/search-bar";
+import { ProductsList } from "./components/products-list";
 
 function App() {
+  const [products, setProducts] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h2>Busca un producto</h2>
+      <SearchProduct setProducts={setProducts} />
+      <hr />
+
+      {products[0] !== undefined ? (
+        <ol>
+          <ProductsList
+            key={products[0]}
+            product={products[0]}
+            setProducts={setProducts}
+          />
+        </ol>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 
